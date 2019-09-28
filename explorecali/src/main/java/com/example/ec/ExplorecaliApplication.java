@@ -56,14 +56,20 @@ public class ExplorecaliApplication implements CommandLineRunner {
 
     /**
      * Create tour entities from an external file
-    */
-    private void createTours() throws IOException {
-        TourFromFile.read(filePath).forEach(importedTour ->
-            tourService.createTour(importedTour.getTitle(), importedTour.getDescription(), importedTour.getBlurb(),
-                    importedTour.getPrice(), importedTour.getLength(), importedTour.getBullets(),
-                    importedTour.getKeywords(), importedTour.getPackageType(), importedTour.getDifficulty(),
-                    importedTour.getRegion()));
-    }
+     */
+//    private void createTours(String fileToImport) throws IOException {
+//        TourFromFile.read(fileToImport).forEach(importedTour ->
+//            tourService.createTour(importedTour.getTitle(),
+//                    importedTour.getDescription(),
+//                    importedTour.getBlurb(),
+//                    importedTour.getPrice(),
+//                    importedTour.getLength(),
+//                    importedTour.getBullets(),
+//                    importedTour.getKeywords(),
+//                    importedTour.getPackageType(),
+//                    importedTour.getDifficulty(),
+//                    importedTour.getRegion()));
+//    }
 
     /**
      * Helper class to import ExploreCalifornia.json
@@ -73,50 +79,30 @@ public class ExplorecaliApplication implements CommandLineRunner {
         private String packageType, title, description, blurb, price, length,
                 bullets, keywords, difficulty, region;
         //reader
-        static List<TourFromFile> read(String filePath) throws IOException {
+        static List<TourFromFile> read(String fileToImport) throws IOException {
             return new ObjectMapper().setVisibility(FIELD, ANY).
-                    readValue(new FileInputStream(filePath), new TypeReference<List<TourFromFile>>() {});
+                    readValue(new FileInputStream(fileToImport), new TypeReference<List<TourFromFile>>() {});
         }
-        protected TourFromFile(){};
+        protected TourFromFile(){}
 
-        public String getPackageType() {
-            return packageType;
-        }
+        String getPackageType() { return packageType; }
 
-        public String getTitle() {
-            return title;
-        }
+        String getTitle() { return title; }
 
-        public String getDescription() {
-            return description;
-        }
+        String getDescription() { return description; }
 
-        public String getBlurb() {
-            return blurb;
-        }
+        String getBlurb() { return blurb; }
 
-        public Integer getPrice() {
-            return Integer.parseInt(price);
-        }
+        Integer getPrice() { return Integer.parseInt(price); }
 
-        public String getLength() {
-            return length;
-        }
+        String getLength() { return length; }
 
-        public String getBullets() {
-            return bullets;
-        }
+        String getBullets() { return bullets; }
 
-        public String getKeywords() {
-            return keywords;
-        }
+        String getKeywords() { return keywords; }
 
-        public Difficulty getDifficulty() {
-            return Difficulty.valueOf(difficulty);
-        }
+        Difficulty getDifficulty() { return Difficulty.valueOf(difficulty); }
 
-        public Region getRegion() {
-            return Region.findByLabel(region);
-        }
+        Region getRegion() { return Region.findByLabel(region); }
     }
 }
