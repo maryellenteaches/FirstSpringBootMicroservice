@@ -23,7 +23,7 @@ import static com.fasterxml.jackson.annotation.PropertyAccessor.FIELD;
 public class ExplorecaliApplication implements CommandLineRunner {
 
     @Value("${ec.importfile}")
-    private String filePath;
+    private String importFile;
 
     @Autowired
     private TourPackageService tourPackageService;
@@ -37,7 +37,7 @@ public class ExplorecaliApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         createTourAllPackages();
-        createTours();
+        createTours(importFile);
     }
 /**
      * Initialize all the known tour packages
@@ -57,19 +57,19 @@ public class ExplorecaliApplication implements CommandLineRunner {
     /**
      * Create tour entities from an external file
      */
-//    private void createTours(String fileToImport) throws IOException {
-//        TourFromFile.read(fileToImport).forEach(importedTour ->
-//            tourService.createTour(importedTour.getTitle(),
-//                    importedTour.getDescription(),
-//                    importedTour.getBlurb(),
-//                    importedTour.getPrice(),
-//                    importedTour.getLength(),
-//                    importedTour.getBullets(),
-//                    importedTour.getKeywords(),
-//                    importedTour.getPackageType(),
-//                    importedTour.getDifficulty(),
-//                    importedTour.getRegion()));
-//    }
+    private void createTours(String fileToImport) throws IOException {
+        TourFromFile.read(fileToImport).forEach(importedTour ->
+            tourService.createTour(importedTour.getTitle(),
+                    importedTour.getDescription(),
+                    importedTour.getBlurb(),
+                    importedTour.getPrice(),
+                    importedTour.getLength(),
+                    importedTour.getBullets(),
+                    importedTour.getKeywords(),
+                    importedTour.getPackageType(),
+                    importedTour.getDifficulty(),
+                    importedTour.getRegion()));
+    }
 
     /**
      * Helper class to import ExploreCalifornia.json
