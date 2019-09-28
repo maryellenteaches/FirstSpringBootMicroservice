@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
  *
  * Created by Mary Ellen Bowman
  */
-
 @Service
 public class TourService {
     private TourRepository tourRepository;
@@ -29,16 +28,16 @@ public class TourService {
     /**
      * Create a new Tour Object and persist it to the Database.
      *
-     * @param title
-     * @param description
-     * @param blurb
-     * @param price
-     * @param duration
-     * @param bullets
-     * @param keywords
-     * @param tourPackageName
-     * @param difficulty
-     * @param region
+     * @param title title
+     * @param description description
+     * @param blurb blurb
+     * @param price price
+     * @param duration duration
+     * @param bullets bullets
+     * @param keywords keywords
+     * @param tourPackageName tour package name
+     * @param difficulty difficulty
+     * @param region region
      * @return Tour Entity
      */
     public Tour createTour(String title, String description, String blurb, Integer price,
@@ -59,6 +58,5 @@ public class TourService {
     public long total() {
         return tourRepository.count();
     }
-
 }
 
