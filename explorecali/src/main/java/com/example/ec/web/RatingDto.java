@@ -1,5 +1,7 @@
 package com.example.ec.web;
 
+import com.example.ec.domain.TourRating;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -23,13 +25,21 @@ public class RatingDto {
     private Integer customerId;
 
     /**
+     * Construct a RatingDto from a fully instantiated TourRating.
+     *
+     * @param tourRating Tour Rating Object
+     */
+    public RatingDto(TourRating tourRating) {
+        this(tourRating.getScore(), tourRating.getComment(), tourRating.getPk().getCustomerId());
+    }
+    /**
      * Constructor to fully initialize the RatingDto
      *
-     * @param score
-     * @param comment
-     * @param customerId
+     * @param score score 1-5
+     * @param comment comment
+     * @param customerId customer identifier
      */
-    public RatingDto(Integer score, String comment, Integer customerId) {
+    private RatingDto(Integer score, String comment, Integer customerId) {
         this.score = score;
         this.comment = comment;
         this.customerId = customerId;
