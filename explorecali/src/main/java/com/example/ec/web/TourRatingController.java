@@ -82,6 +82,19 @@ public class TourRatingController {
     }
 
     /**
+     * Verify and return the TourRating for a particular tourId and Customer
+     * @param tourId tour identifier
+     * @param customerId customer identifier
+     * @return the found TourRating
+     * @throws NoSuchElementException if no TourRating found
+     */
+    private TourRating verifyTourRating(int tourId, int customerId) throws NoSuchElementException {
+        return tourRatingRepository.findByPkTourIdAndPkCustomerId(tourId, customerId).orElseThrow(() ->
+                new NoSuchElementException("Tour-Rating pair for request("
+                + tourId + " for customer" + customerId));
+    }
+
+    /**
      * Verify and return the Tour given a tourId.
      *
      * @param tourId tour identifier
