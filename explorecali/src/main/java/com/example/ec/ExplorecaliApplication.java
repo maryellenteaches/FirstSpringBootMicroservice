@@ -36,13 +36,15 @@ public class ExplorecaliApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        createTourAllPackages();
+        createTourPackages();
+        long numOfTourPackages = tourPackageService.total();
         createTours(importFile);
+        long numOfTours = tourService.total();
     }
-/**
+    /**
      * Initialize all the known tour packages
      */
-	private void createTourAllPackages(){
+	private void createTourPackages(){
         tourPackageService.createTourPackage("BC", "Backpack Cal");
         tourPackageService.createTourPackage("CC", "California Calm");
         tourPackageService.createTourPackage("CH", "California Hot springs");
