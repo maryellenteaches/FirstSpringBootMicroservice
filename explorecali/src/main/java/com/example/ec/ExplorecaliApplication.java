@@ -7,6 +7,8 @@ import com.example.ec.service.TourService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -18,28 +20,28 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 import static com.fasterxml.jackson.annotation.PropertyAccessor.FIELD;
 
 @SpringBootApplication
-public class ExplorecaliApplication {
+public class ExplorecaliApplication implements CommandLineRunner {
+
+    @Value("${ec.importfile}")
+    private String importFile;
 
     @Autowired
     private TourPackageService tourPackageService;
-
     @Autowired
     private TourService tourService;
 
     public static void main(String[] args) {
         SpringApplication.run(ExplorecaliApplication.class, args);
-	}
+    }
 
-
-    private void loadToursAtStartup() throws IOException {
-        //Create the Tour Packages
+    @Override
+    public void run(String... args) throws Exception {
         createTourPackages();
-        long numOfPackages = tourPackageService.total();
-
-        //Load the tours from an external Json File
-        createTours("ExploreCalifornia.json");
+        long numOfTourPackages = tourPackageService.total();
+        createTours(importFile);
         long numOfTours = tourService.total();
     }
+
 
     /**
      * Initialize all the known tour packages
