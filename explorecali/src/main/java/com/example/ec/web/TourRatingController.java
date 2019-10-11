@@ -71,17 +71,14 @@ public class TourRatingController {
      *
      * @param tourId tour identifier
      * @return Tuple of "average" and the average value.
-     * @throws NoSuchElementException (404) if no ratings exist for the the tour
      */
     @GetMapping(path = "/average")
-    public Map<String, Double> getAverage(@PathVariable(value = "tourId") int tourId)
-            throws NoSuchElementException {
+    public Map<String, Double> getAverage(@PathVariable(value = "tourId") int tourId) {
         verifyTour(tourId);
         return Map.of("average",tourRatingRepository.findByPkTourId(tourId).stream()
                 .mapToInt(TourRating::getScore).average()
                 .orElseThrow(() ->
                 new NoSuchElementException("Tour has no Ratings")));
-
     }
 
     /**
