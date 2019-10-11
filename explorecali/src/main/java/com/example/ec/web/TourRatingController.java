@@ -64,10 +64,11 @@ public class TourRatingController {
                                             Pageable pageable){
         verifyTour(tourId);
         Page<TourRating> ratings = tourRatingRepository.findByPkTourId(tourId, pageable);
-        return new PageImpl<>
-                (ratings.get().map(RatingDto::new).collect(Collectors.toList()),
+        return new PageImpl<>(
+                ratings.get().map(RatingDto::new).collect(Collectors.toList()),
                 pageable,
-                ratings.getTotalElements());
+                ratings.getTotalElements()
+        );
     }
 
     /**
