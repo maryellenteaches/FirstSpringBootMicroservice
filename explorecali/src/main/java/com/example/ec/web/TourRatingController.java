@@ -89,7 +89,7 @@ public class TourRatingController {
      * @param ratingDto rating Data Transfer Object
      * @return The modified Rating DTO.
      */
-    @RequestMapping(method = RequestMethod.PUT)
+    @PutMapping
     public RatingDto updateWithPut(@PathVariable(value = "tourId") int tourId, @RequestBody @Validated RatingDto ratingDto) {
         TourRating rating = verifyTourRating(tourId, ratingDto.getCustomerId());
         rating.setScore(ratingDto.getScore());
@@ -103,7 +103,7 @@ public class TourRatingController {
      * @param ratingDto rating Data Transfer Object
      * @return The modified Rating DTO.
      */
-    @RequestMapping(method = RequestMethod.PATCH)
+    @PatchMapping
     public RatingDto updateWithPatch(@PathVariable(value = "tourId") int tourId, @RequestBody @Validated RatingDto ratingDto) {
         TourRating rating = verifyTourRating(tourId, ratingDto.getCustomerId());
         if (ratingDto.getScore() != null) {
@@ -121,7 +121,7 @@ public class TourRatingController {
      * @param tourId tour identifier
      * @param customerId customer identifier
      */
-    @RequestMapping(method = RequestMethod.DELETE, path = "/{customerId}")
+    @DeleteMapping(path = "/{customerId}")
     public void delete(@PathVariable(value = "tourId") int tourId, @PathVariable(value = "customerId") int customerId) {
         TourRating rating = verifyTourRating(tourId, customerId);
         tourRatingRepository.delete(rating);
