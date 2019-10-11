@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
 /**
@@ -76,9 +77,11 @@ public class TourRatingController {
     public Map<String, Double> getAverage(@PathVariable(value = "tourId") int tourId)
             throws NoSuchElementException {
         verifyTour(tourId);
-        return Map.of("average",
-                tourRatingRepository.findByPkTourId(tourId).stream()
-                        .mapToInt(TourRating::getScore).average().getAsDouble());
+        return Map.of("average",tourRatingRepository.findByPkTourId(tourId).stream()
+                .mapToInt(TourRating::getScore).average()
+                .orElseThrow(() ->
+                new NoSuchElementException("Tour has no Ratings")));
+
     }
 
 
