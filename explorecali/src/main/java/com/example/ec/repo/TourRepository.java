@@ -13,7 +13,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
  *
  * Created by Mary Ellen Bowman
  */
-public interface TourRepository extends PagingAndSortingRepository<Tour, Integer> {
+public interface TourRepository extends PagingAndSortingRepository<Tour, String> {
     /**
      * Find Tours associated with the Tour Package.
      *
@@ -32,7 +32,7 @@ public interface TourRepository extends PagingAndSortingRepository<Tour, Integer
 
     @Override
     @RestResource(exported = false)
-    void deleteById(Integer integer);
+    void deleteById(String string);
 
     @Override
     @RestResource(exported = false)
