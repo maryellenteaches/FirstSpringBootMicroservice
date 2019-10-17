@@ -60,10 +60,8 @@ public class ExplorecaliApplication implements CommandLineRunner {
      */
     private void createTours(String fileToImport) throws IOException {
         TourFromFile.read(fileToImport).forEach(tourFromFile ->
-            tourPackageService.findByName(tourFromFile.getPackageName())
-                    .ifPresent(tourPackage ->
-                            tourService.createTour(tourFromFile.getTitle(), tourPackage, tourFromFile.getDetails())
-                    )
+                        tourService.createTour(tourFromFile.getTitle(),
+                                tourFromFile.getPackageName(), tourFromFile.getDetails())
         );
     }
 
@@ -74,7 +72,7 @@ public class ExplorecaliApplication implements CommandLineRunner {
      *
      */
     private static class TourFromFile {
-
+        //fields
         String title;
         String packageName;
         Map<String, String> details;

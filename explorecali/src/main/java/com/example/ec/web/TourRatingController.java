@@ -38,14 +38,15 @@ public class TourRatingController {
      * Create a Tour Rating.
      *
      * @param tourId tour identifier
-     * @param ratingDto rating data transfer object
+     * @param tourRating rating data transfer object
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createTourRating(@PathVariable(value = "tourId") String tourId, @RequestBody @Validated TourRating ratingDto) {
+    public void createTourRating(@PathVariable(value = "tourId") String tourId,
+                                 @RequestBody @Validated TourRating tourRating) {
         verifyTour(tourId);
-        tourRatingRepository.save(new TourRating(tourId, ratingDto.getCustomerId(),
-                ratingDto.getScore(), ratingDto.getComment()));
+        tourRatingRepository.save(new TourRating(tourId, tourRating.getCustomerId(),
+                tourRating.getScore(), tourRating.getComment()));
     }
 
     /**
@@ -80,33 +81,33 @@ public class TourRatingController {
      * Update score and comment of a Tour Rating
      *
      * @param tourId tour identifier
-     * @param ratingDto rating Data Transfer Object
+     * @param tourRating rating Data Transfer Object
      * @return The modified Rating DTO.
      */
     @PutMapping
     public TourRating updateWithPut(@PathVariable(value = "tourId") String tourId,
-                                    @RequestBody @Validated TourRating ratingDto) {
-        TourRating rating = verifyTourRating(tourId, ratingDto.getCustomerId());
-        rating.setScore(ratingDto.getScore());
-        rating.setComment(ratingDto.getComment());
+                                    @RequestBody @Validated TourRating tourRating) {
+        TourRating rating = verifyTourRating(tourId, tourRating.getCustomerId());
+        rating.setScore(tourRating.getScore());
+        rating.setComment(tourRating.getComment());
         return tourRatingRepository.save(rating);
     }
     /**
      * Update score or comment of a Tour Rating
      *
      * @param tourId tour identifier
-     * @param ratingDto rating Data Transfer Object
+     * @param tourRating rating Data Transfer Object
      * @return The modified Rating DTO.
      */
     @PatchMapping
     public TourRating updateWithPatch(@PathVariable(value = "tourId") String tourId,
-                                      @RequestBody @Validated TourRating ratingDto) {
-        TourRating rating = verifyTourRating(tourId, ratingDto.getCustomerId());
-        if (ratingDto.getScore() != null) {
-            rating.setScore(ratingDto.getScore());
+                                      @RequestBody @Validated TourRating tourRating) {
+        TourRating rating = verifyTourRating(tourId, tourRating.getCustomerId());
+        if (tourRating.getScore() != null) {
+            rating.setScore(tourRating.getScore());
         }
-        if (ratingDto.getComment() != null) {
-            rating.setComment(ratingDto.getComment());
+        if (tourRating.getComment() != null) {
+            rating.setComment(tourRating.getComment());
         }
         return tourRatingRepository.save(rating);
     }
