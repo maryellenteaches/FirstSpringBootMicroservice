@@ -29,13 +29,20 @@ public class Tour {
     @Indexed
     private String tourPackageName;
 
-    private Map<String, String> fields;
+    private Map<String, String> details;
 
-    public Tour(String title, TourPackage tourPackage, Map<String, String> fields) {
+    /**
+     * Construct a fully initialized Tour.
+     *
+     * @param title title of the tour
+     * @param tourPackage tour package
+     * @param details details about the tour (key-value pairs)
+     */
+    public Tour(String title, TourPackage tourPackage, Map<String, String> details) {
         this.title = title;
         this.tourPackageCode = tourPackage.getCode();
         this.tourPackageName = tourPackage.getName();
-        this.fields = fields;
+        this.details = details;
     }
 
     protected Tour() {
@@ -57,15 +64,15 @@ public class Tour {
         return tourPackageName;
     }
 
-    public Map<String, String> getFields() {
-        return fields;
+    public Map<String, String> getDetails() {
+        return details;
     }
 
     @Override
     public String toString() {
         return "Tour{" +
                 "id='" + id + '\'' +
-                ", fields=" + fields +
+                ", details=" + details +
                 '}';
     }
 
@@ -75,12 +82,12 @@ public class Tour {
         if (o == null || getClass() != o.getClass()) return false;
         Tour tour = (Tour) o;
         return Objects.equals(id, tour.id) &&
-                Objects.equals(fields, tour.fields);
+                Objects.equals(details, tour.details);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, fields);
+        return Objects.hash(id, details);
     }
 
 }

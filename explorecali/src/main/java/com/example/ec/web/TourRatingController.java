@@ -1,6 +1,5 @@
 package com.example.ec.web;
 
-import com.example.ec.domain.Tour;
 import com.example.ec.domain.TourRating;
 import com.example.ec.repo.TourRatingRepository;
 import com.example.ec.repo.TourRepository;
@@ -44,7 +43,7 @@ public class TourRatingController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createTourRating(@PathVariable(value = "tourId") String tourId, @RequestBody @Validated TourRating ratingDto) {
-        Tour tour = verifyTour(tourId);
+        verifyTour(tourId);
         tourRatingRepository.save(new TourRating(tourId, ratingDto.getCustomerId(),
                 ratingDto.getScore(), ratingDto.getComment()));
     }
@@ -142,13 +141,13 @@ public class TourRatingController {
      * Verify and return the Tour given a tourId.
      *
      * @param tourId tour identifier
-     * @return the found Tour
      * @throws NoSuchElementException if no Tour found.
      */
-    private Tour verifyTour(String tourId) throws NoSuchElementException {
-        return tourRepository.findById(tourId).orElseThrow(() ->
-            new NoSuchElementException("Tour does not exist " + tourId));
+    private void verifyTour(String tourId) throws NoSuchElementException {
+        if (!tourRepository.existsById(tourId)) {
+            throw new NoSuchElementException("Tour does not exist " + tourId);
         }
+    }
 
     /**
      * Exception handler if NoSuchElementException is thrown in this Controller

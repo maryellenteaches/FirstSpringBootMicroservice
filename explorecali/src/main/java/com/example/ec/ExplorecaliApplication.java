@@ -62,7 +62,7 @@ public class ExplorecaliApplication implements CommandLineRunner {
         TourFromFile.read(fileToImport).forEach(tourFromFile ->
             tourPackageService.findByName(tourFromFile.getPackageName())
                     .ifPresent(tourPackage ->
-                            tourService.createTour(tourFromFile.getTitle(), tourPackage, tourFromFile.getFields())
+                            tourService.createTour(tourFromFile.getTitle(), tourPackage, tourFromFile.getDetails())
                     )
         );
     }
@@ -77,14 +77,14 @@ public class ExplorecaliApplication implements CommandLineRunner {
 
         String title;
         String packageName;
-        Map<String, String> fields;
+        Map<String, String> details;
 
         TourFromFile(Map<String, String> record) {
             this.title =  record.get("title");
-            record.remove("title");
             this.packageName = record.get("packageType");
-            record.remove("packageType");
-            this.fields = record;
+            this.details = record;
+            this.details.remove("packageType");
+            this.details.remove("title");
         }
         //reader
         static List<TourFromFile> read(String fileToImport) throws IOException {
@@ -103,8 +103,8 @@ public class ExplorecaliApplication implements CommandLineRunner {
             return packageName;
         }
 
-        Map<String, String> getFields() {
-            return fields;
+        Map<String, String> getDetails() {
+            return details;
         }
     }
 }
