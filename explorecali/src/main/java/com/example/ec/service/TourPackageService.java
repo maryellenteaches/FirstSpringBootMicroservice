@@ -31,9 +31,16 @@ public class TourPackageService {
      * @return new or existing tour package
      */
     public TourPackage createTourPackage(String code, String name) {
-        return tourPackageRepository.save(new TourPackage(code, name));
+        return tourPackageRepository.findById(code)
+                .orElse(tourPackageRepository.save(new TourPackage(code, name)));
     }
 
+    /**
+     * Find Tour package by the name.
+     *
+     * @param name name of tour package
+     * @return Optional of a Tour Package
+     */
     public Optional<TourPackage> findByName(String name){
         return tourPackageRepository.findByName(name);
     }

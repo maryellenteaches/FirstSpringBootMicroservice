@@ -26,7 +26,6 @@ public class Tour {
     @Indexed
     private String tourPackageCode;
 
-    @Indexed
     private String tourPackageName;
 
     private Map<String, String> details;
