@@ -45,7 +45,7 @@ _Twitter: @MEllenBowman_
 
 5-begin : Pivot to a MongoDb NoSQL Data source (before)
 
-5-end :  5. Pivot to a MongoDb NoSQL Data source (after)
+5-end :  Pivot to a MongoDb NoSQL Data source (after)
 
 
  
