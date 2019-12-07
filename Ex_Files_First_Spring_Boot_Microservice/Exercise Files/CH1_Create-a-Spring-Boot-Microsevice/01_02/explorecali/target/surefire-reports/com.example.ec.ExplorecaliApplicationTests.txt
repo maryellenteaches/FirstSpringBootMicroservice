@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.example.ec.ExplorecaliApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.778 s - in com.example.ec.ExplorecaliApplicationTests
