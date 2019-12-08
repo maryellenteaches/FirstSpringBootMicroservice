@@ -19,3 +19,33 @@ Quiz:
   A: False
 
 ---
+
+# Chater 2:
+
+Quiz:
+
+- Which method looks up all the tours given a tour package code?
+  A: List<Tour> findByTourPackageCode(String code)
+- Given the following class declaration and the TourRatingRepository declaration that follows it, what should be substituted for T and ID?
+
+```
+@Entity
+public class TourRating {
+  @Id
+  private String id;
+  @Column
+  private Integer score;
+}
+
+public interface TourRatingRepository extends CrudRepository<T, ID> {
+}
+```
+
+    A:
+    T = TourRating
+    ID = String
+
+- What is JPA an acronym for?
+  A: Java Persistence API
+
+---
